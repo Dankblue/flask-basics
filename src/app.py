@@ -65,13 +65,14 @@ def create_app(test_config=None):
             dal.add_question(json)
             return "Created", 201
 
-    @app.route("/question/<int:id>", methods=["GET"])
+    @app.route("/question/<int:id>", methods=["GET", "DELETE"])
     def get_question(id):
-        question = dal.get_questions(id)
-        return question.to_dict()
-
-    @app.route("/question/<int:id>", methods=["DELETE"])
-    def delete_question(id):
-        question = dal.get_questions(id)
-        return question.to_dict()
+        if request.method == "GET":
+            question = dal.get_questions(id)
+            return question.to_dict()
+        if request.method == "DELETE":
+            question = dal.get_questions(id)
+            return question.to_dict()
+    
+    
     return app
