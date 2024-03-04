@@ -70,4 +70,8 @@ def create_app(test_config=None):
         question = dal.get_questions(id)
         return question.to_dict()
 
+    @app.route("/question/<int:id>", methods=["DELETE"])
+    def delete_question(id):
+        question = dal.get_questions(id)
+        return question.to_dict()
     return app
