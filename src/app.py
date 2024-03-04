@@ -67,12 +67,17 @@ def create_app(test_config=None):
 
     @app.route("/question/<int:id>", methods=["GET", "DELETE"])
     def get_question(id):
+        try:
+            question = dal.get_questions(id)
+        except:
+            return "not found", 404
         if request.method == "GET":
             question = dal.get_questions(id)
             return question.to_dict()
         if request.method == "DELETE":
             question = dal.get_questions(id)
             return question.to_dict()
+
     
     
     return app

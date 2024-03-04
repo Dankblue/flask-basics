@@ -5,6 +5,8 @@ def get_questions(id=None):
     questions = pd.read_csv("data/questions.csv", header=0, index_col=0)
     if id is None:
         return questions
+    elif id not in questions.index:
+        raise ValueError
     else:
         return questions.loc[id]
 
